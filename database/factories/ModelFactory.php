@@ -16,9 +16,43 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(App\Actor::class, function (Faker $faker) {
+    $genders = ['female', 'male'];
+
+    $randIndex = array_rand($genders);
+    $gender = $genders[$randIndex];
+
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'name' => $faker->name($gender),
+        'gender' => $gender,
     ];
 });
+
+$factory->define(App\Category::class, function (Faker $faker) {
+    return [
+        'name' => $faker->jobTitle,
+    ];
+});
+
+$factory->define(App\Movie::class, function (Faker $faker) {
+    return [
+        'title' => $faker->catchPhrase,
+        'plot' => $faker->realText()
+    ];
+});
+
+$factory->define(App\Studio::class, function (Faker $faker) {
+    return [
+        'name' => $faker->company,
+    ];
+});
+
+$factory->define(App\Tag::class, function (Faker $faker) {
+    return [
+        'name' => $faker->userName,
+    ];
+});
+
+
+
+
